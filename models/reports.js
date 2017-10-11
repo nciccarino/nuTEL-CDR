@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes){
 
 		client: {
 			type: DataTypes.STRING, 
-		}
+		},
 
 		date: {
 			type: DataTypes.DATE, 

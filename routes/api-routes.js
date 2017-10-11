@@ -1,13 +1,14 @@
 //Requiring models directory, our passport configuration, and imdb-api package
 var db = require('../models');
 var passport = require("../config/passport");
+// Sequelize = require('sequelize'); 
 
 module.exports= function(app){
 
 
 //PASSPORT ROUTES
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
-    res.json("/admin");
+    res.json("/home");
   });
 
   app.post("/api/signup", function(req, res) {
@@ -46,7 +47,6 @@ module.exports= function(app){
   });
 
   app.get('/api/reports', function(req, res){
-    console.log(db.Event)
     db.Report.findAll({}).then(function(data){
       console.log(data);
       res.json(data);
@@ -56,7 +56,7 @@ module.exports= function(app){
   app.post("/api/reports", function(req, res) {
     console.log(req.body);
 
-    db.report.create({
+    db.Report.create({
       title: req.body.title,
       client: req.body.client,
       date: req.body.date,
@@ -152,4 +152,17 @@ module.exports= function(app){
       res.json(data); 
     });
   });
+
+  app.get("/info/:table", function(req, res) {
+    db.sequelize.query("SELECT * FROM " + req.params.table, function(err, doc) {
+      if (err) {
+        console.log(err);
+      }
+      else {
+        var obj = doc; 
+
+        res.json(obj)
+      }
+    })
+  })
 }//end module.exports

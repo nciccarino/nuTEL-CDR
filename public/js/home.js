@@ -90,10 +90,10 @@ $(document).ready(function(){
 
               futureDiv.append(titleDiv);
               futureDiv.append(clientDiv); 
-              futureDiv.append(locationDiv);
+              futureDiv.append(tableDiv);
               futureDiv.append(dateDiv);
               futureDiv.append(notesDiv);
-              titleDiv.append(urlDiv);
+              // titleDiv.append(urlDiv);
 
               futureDiv.data("clickedData", data[i]);
 
@@ -137,7 +137,7 @@ function handleMyTable(){
         console.log(data);
 
         // for(var i = 0; i < data.length; i++){
-          
+
         // }
     })
   }
@@ -274,7 +274,7 @@ function handleMyTable(){
     var theDate = $("#reportDate").val();
     var theNotes = $("#reportNotes").val().trim();
     var theTable = $("#reportTable").val().trim();
-    var theURL = $("#reportCategory").val().trim();
+    var theCategory = $("#reportCategory").val().trim();
 
     addArray.push(theTitle, theClient, theDate, theNotes, theTable, theCategory);
 
@@ -288,9 +288,6 @@ function handleMyTable(){
       table: addArray[4],
       category: addArray[5]
     }; 
-
-    console.log("\nNEW EVENT OBJECT CREATED:")
-    console.log(newEvent);
 
     if (!addArray[0] || !addArray[2] || !addArray[4] || !addArray[5]) {
       alert("Missing Required Information")
