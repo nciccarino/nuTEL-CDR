@@ -28,6 +28,7 @@ $(document).ready(function(){
 
   var updateObj;
   var id;
+  var table; 
 
   $('#addReport').on("click", function() {
       console.log("add click")
@@ -53,6 +54,8 @@ $(document).ready(function(){
     $("#report-delete").css("display", "block");
   });
 
+  $(".buttonTable").on("click", handleMyTable);
+
   $("#updateReportTitle").on("click", handleUpdateTitle);
   $("#updateReportClient").on("click", handleUpdateTitle);
   $("#updateReportDate").on("click", handleUpdateDate);
@@ -62,51 +65,52 @@ $(document).ready(function(){
   reportCreator();
   //ajax request to pull data from the database/server
   //Then calls function to populate it on the page
-function reportCreator(){
-    $.ajax({
-        method: 'GET',
-        url: '/api/reports'
-    }).done(function(data){
-        console.log(data);
+  function reportCreator(){
+      $.ajax({
+          method: 'GET',
+          url: '/api/reports'
+      }).done(function(data){
+          console.log(data);
 
-        $(".futureBody").empty();
-        //populate movies onto front end
-        for(var i = 0; i< data.length; i++){
-   
-            var futureDiv = $("<div>").addClass("eventBlocks");
-            futureDiv.addClass("futureDiv" +i);
-            futureDiv.addClass("block");
+          $(".futureBody").empty();
+          //populate movies onto front end
+          for(var i = 0; i< data.length; i++){
+     
+              var futureDiv = $("<div>").addClass("eventBlocks");
+              futureDiv.addClass("futureDiv" +i);
+              futureDiv.addClass("block");
 
-            var showDate = moment(data[i].date).add(4, 'hours').format('LLL');
+              var showDate = moment(data[i].date).add(4, 'hours').format('LLL');
 
-            var titleDiv = $("<h4>" + data[i].title + "</h4>").addClass("textEntry");
-            var clientDiv = $("<h5>" + data[i].client + "</h5>").addClass("textEntry");
-            var tableDiv = $("<h5>" + data[i].table + "</h5>").addClass("textEntry");
-            var dateDiv = $("<h5>" + showDate + "</h5>").addClass("textEntry");
-            var notesDiv = $("<p>" + data[i].notes + "</p>").addClass("textEntry");
+              var titleDiv = $("<h4>" + data[i].title + "</h4>").addClass("textEntry");
+              var clientDiv = $("<h5>" + data[i].client + "</h5>").addClass("textEntry");
+              var tableDiv = $("<h5>" + data[i].table + "</h5>").addClass("textEntry");
+              var dateDiv = $("<h5>" + showDate + "</h5>").addClass("textEntry");
+              var notesDiv = $("<p>" + data[i].notes + "</p>").addClass("textEntry");
 
-            futureDiv.append(titleDiv);
-            futureDiv.append(clientDiv); 
-            futureDiv.append(locationDiv);
-            futureDiv.append(dateDiv);
-            futureDiv.append(notesDiv);
-            titleDiv.append(urlDiv);
+              futureDiv.append(titleDiv);
+              futureDiv.append(clientDiv); 
+              futureDiv.append(locationDiv);
+              futureDiv.append(dateDiv);
+              futureDiv.append(notesDiv);
+              titleDiv.append(urlDiv);
 
-            futureDiv.data("clickedData", data[i]);
+              futureDiv.data("clickedData", data[i]);
 
-          if(data[i].category=="current"){
-            currentContainer.append(futureDiv);
+            if(data[i].category=="current"){
+              currentContainer.append(futureDiv);
+            }
+            else if(data[i].category=="finished"){
+              finishedContainer.append(futureDiv);
+            }
           }
-          else if(data[i].category=="finished"){
-            finishedContainer.append(futureDiv);
-          }
-        }
-    })
-  }
+      })
+    }
 
   function handleMyReport(){
       var clickedData = $(this).data("clickedData")
       id = $(this).data("clickedData").id;
+      table = $(this).data("clickedData").table;
 
       console.log(id);
       console.log(typeof id);
@@ -117,11 +121,25 @@ function reportCreator(){
       //show the movie title
       $("#myReportTitle").html(clickedData.title);
 
-      //display current notes on the movis
       $(".notesBody").html(clickedData.notes);
 
       //hiddien once user clicks edit
       $("#editNotes").html(clickedData.notes);
+
+
+  }
+
+function handleMyTable(){
+    $.ajax({
+        method: 'GET',
+        url: '/info/' + table
+    }).done(function(data){
+        console.log(data);
+
+        // for(var i = 0; i < data.length; i++){
+          
+        // }
+    })
   }
 
 //---------------- update stuff -------------------------------------
@@ -267,7 +285,7 @@ function reportCreator(){
       client: addArray[1],
       date: addArray[2],
       notes: addArray[3],
-      table: addArray[4]
+      table: addArray[4],
       category: addArray[5]
     }; 
 

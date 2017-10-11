@@ -1,32 +1,29 @@
-// use mysql npm package 
+var mysql = require("mysql");
 
-//create functions as a modular.exports
+var connection; 
 
-// var mysql = require("mysql");
-// var inquirer = require("inquirer");
+if (process.env.JAWSDB_URL) {
+	connection = mysql.createConnection(process.env.JAWSDB_URL); 
+} else {
+	connection = mysql.createConnection({
+  		host: "localhost",
+  		user: "root",
+  		password: "",
+  		database: "nuteldb"
+	});
+}
 
-// var connection = mysql.createConnection({
-//   host: "localhost",
-//   port: 3306,
+connection.connect(function(err) {
+  if (err) throw err;
+  console.log("connected as id " + connection.threadId + "\n");
+});
 
-//   // Your username
-//   user: "root",
+module.exports= function(app) {
 
-//   // Your password
-//   password: "",
-//   database: "top_songsDB"
-// });
+	app.get("/info/:table", function(req, res) {
+		connection.query("SELECT * FROM" + req.params.table, function(err, res) {
+			res.json(data); 
+		})
+	})
 
-// connection.connect(function(err) {
-//   if (err) throw err;
-//   console.log("connected as id " + connection.threadId + "\n");
-  
-//   runSearch();
-
-// });
-
-//-------------------------------------OR -----------------------------------------------
-
-//doing something like db.findAll or something might work because the connection is established in the index.js model
-
-//db.query("SELECT randomShit FROM whateverthefuck GROUP BY idontcare")
+}; 
