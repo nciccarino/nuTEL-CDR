@@ -1,0 +1,65 @@
+#homeTitle {
+	text-align: center;
+}
+
+.urlEntry {
+	float: right;
+	margin-right: 10px;
+}
+
+.reportBlocks {
+	border-radius: 6px; 
+	border-width: 1px; 
+	border-color: black;
+	border-style: solid; 
+	margin-bottom: 10px;
+}
+
+.reportBlocks:hover {
+	background-color: #2c3e50;
+	color: white;
+}
+
+.deleteReportBtn {
+	margin-left: 10px; 
+	margin-bottom: 10px;
+}
+
+.textEntry {
+	margin-left: 5px;
+}
+
+#formReport {
+	display: none;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#report-delete {
+	display: none;
+	text-align: center; 
+	margin-top: 20px;
+}
+
+#deleteReportBtn {
+	width: 100%;
+	font-size: 20px; 
+	margin-top: 20px;
+}
+
+.modal-header {
+	background-color: #2c3e50;
+	color: white;
+}
+
+#modalSubmit {
+	width: 100%;
+}
+
+#editTitle, #editClient, #editTable, #editDate, #editNotes {
+	margin-bottom: 20px;
+}
+
+.newRow {
+	width: 100%;
+}

@@ -3,7 +3,7 @@
 
 <head>
     <title>Nu-TEL Communications</title>
-    <!-- <link rel="stylesheet" href="css/admin.css" media="screen" title="no title"> -->
+    <link rel="stylesheet" href="css/style.css" media="screen" title="no title">
     <script
   src="https://code.jquery.com/jquery-2.2.4.js"
   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
@@ -104,35 +104,31 @@
             <button class="btn btn-danger buttonDelete">Delete Report</button>
             <button class="btn btn-default buttonTable">Show Table</button>
 
-            <div id="tableShown">
-              <table style="width:100%; display: none;">
-                <tr>
-                  <th>Date</th>
-                  <th>Source</th> 
-                  <th>Destination</th>
-                  <th>Seconds</th>
-                  <th>CallerID</th>
-                  <th>Disposition</th>
-                  <th>Cost</th>
-                  <th>Peer</th>
-                </tr>
-                <tr id="rowDate"></tr>
-                <tr id="rowSource"></tr>
-                <tr id="rowDestination"></tr>
-                <tr id="rowSeconds"></tr>
-                <tr id="rowCallerID"></tr>
-                <tr id="rowDisposition"></tr>
-                <tr id="rowCost"></tr>
-                <tr id="rowPeer"></tr>
+            <div id="tableShown" style="display: none;">
+              <table class="table table-striped" style="width:100%;">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Source</th> 
+                    <th>Destination</th>
+                    <th>Seconds</th>
+                    <th>CallerID</th>
+                    <th>Disposition</th>
+                    <th>Cost</th>
+                    <th>Peer</th>
+                  </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
               </table>
             </div>
 
             <div id="report-delete">
             	<h2 id="warningDelete">Are you sure you want to delete this Report?</h2>
-							<button type="submit" data-dismiss="modal" class="btn btn-danger" id="deleteEventBtn">Yes, Delete This Report</button>
+							<button type="submit" data-dismiss="modal" class="btn btn-danger" id="deleteReportBtn">Yes, Delete This Report</button>
             </div>
 
-						<div id="report-form">
+						<div id="formReport">
 	            <form id="edit-title">
 	              <div class="form-group">
 	                <label for="editTitle">Edit Title</label>
@@ -165,7 +161,7 @@
 	               	<button type="submit" data-dismiss="modal" class="btn btn-danger" id="updateReportNotes">Submit</button>
 	              </div>
 	            </form>
-	            <form id="edit-URL">
+	            <form id="edit-category">
 	              <div class="form-group">
                   <label for="editCategory">Change Catagory</label>
                   <select class="form-control" id="editCategory">

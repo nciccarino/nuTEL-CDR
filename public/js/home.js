@@ -44,13 +44,13 @@ $(document).ready(function(){
 
   $(".buttonEdit").on("click", function(){
     event.preventDefault();
-    $("#report-form").css("display", "block"); 
+    $("#formReport").css("display", "block"); 
     $("#report-delete").css("display", "none");
   });
 
   $(".buttonDelete").on("click", function(){
     event.preventDefault();
-    $("#report-form").css("display", "none"); 
+    $("#formReport").css("display", "none"); 
     $("#report-delete").css("display", "block");
   });
 
@@ -76,7 +76,7 @@ $(document).ready(function(){
           //populate movies onto front end
           for(var i = 0; i< data.length; i++){
      
-              var futureDiv = $("<div>").addClass("eventBlocks");
+              var futureDiv = $("<div>").addClass("reportBlocks");
               futureDiv.addClass("futureDiv" +i);
               futureDiv.addClass("block");
 
@@ -136,10 +136,15 @@ function handleMyTable(){
     }).done(function(data){
         console.log(data);
 
-        // for(var i = 0; i < data.length; i++){
+        var tableBody = $("#tableBody")
 
-        // }
+        for(var i = 0; i < data.length; i++){
+          var newRow = $("<tr><td>" + data[i].Date + "</td><td>" + data[i].Source + "</td><td>" + data[i].Destination + "</td><td>" + data[i].Seconds + "</td><td>" + data[i].CallerID + "</td><td>" + data[i].Disposition + "</td><td>" + data[i].Cost + "</td><td>" + data[i].Peer + "</td></tr>").addClass(newRow)
+          tableBody.append(newRow);
+        }
     })
+    
+    $("#tableShown").css("display", "block")
   }
 
 //---------------- update stuff -------------------------------------

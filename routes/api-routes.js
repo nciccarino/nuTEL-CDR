@@ -154,15 +154,10 @@ module.exports= function(app){
   });
 
   app.get("/info/:table", function(req, res) {
-    db.sequelize.query("SELECT * FROM " + req.params.table, function(err, doc) {
-      if (err) {
-        console.log(err);
-      }
-      else {
-        var obj = doc; 
-
-        res.json(obj)
-      }
+    db.sequelize.query("SELECT * FROM `" + req.params.table + "`", { 
+      type: db.sequelize.QueryTypes.SELECT
+    }).then(function(data) {
+      res.json(data); 
     })
   })
 }//end module.exports
